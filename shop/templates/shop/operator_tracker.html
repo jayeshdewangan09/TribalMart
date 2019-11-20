@@ -1,0 +1,55 @@
+{% extends 'shop/basic.html' %}
+
+{% block title%}Tracker update{% endblock %}
+
+{% block userfname %} {% endblock %}
+{% block useremail %} {% endblock %}
+
+{% block body%}
+
+<div class="container">
+    <div class="col my-4">
+        <h2>Enter the Order Id of the order to update the tracking details.</h2><br/>
+        <h6>The order id is given on the order packet.</h6>
+<form method="post" action="/shop/operator_tracker">{% csrf_token %}
+    <input name="uem" type="text" id="uem" value="" hidden/>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="orderId">Order Id</label>
+                    <input type="text" class="form-control" id="orderId" name="orderId" placeholder="Order Id">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" name="desc" placeholder="Enter the tracking details">
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+</form>
+    </div>
+
+</div>
+
+
+{% endblock %}
+{% block js %}
+<script>
+var un = localStorage.getItem('user_name');
+var ue = localStorage.getItem('user_email');
+document.getElementById('user_fname').innerHTML = un;
+document.getElementById('user_email').innerHTML = ue;
+document.getElementById('u_fname').innerHTML = un;
+document.getElementById('u_email').innerHTML = ue;
+document.getElementById('user_fname').setAttribute("value", un);
+document.getElementById('user_email').setAttribute("value", ue);
+document.getElementById('uem').setAttribute("value", ue);
+localStorage.setItem('user_name', un);
+localStorage.setItem('user_email', ue);
+{% if order_id_not_found == True %}
+alert('We didn't find the order id....Please enter the correct order id.');
+{% endif %}
+{% if order_id_not_found == False %}
+alert('Tracking update has been registered. Update id is {{update_id}} ');
+{% endif %}
+
+</script>
+{% endblock %}

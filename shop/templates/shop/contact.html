@@ -1,0 +1,335 @@
+{% extends 'shop/basic.html' %}
+
+{% block title%}Contact{% endblock %}
+
+{% block userfname %} {{user_fname}} {% endblock %}
+{% block useremail %} {{user_email}} {% endblock %}
+
+
+<input type="text" name="u_email" value="{{user_email}}" hidden/>
+
+{% block body%}
+<!-- Flexbox container for aligning the toasts -->
+
+<div class="container my-3">
+
+  <!-- Modal -->
+
+
+    <span></span><h3>HELP CENTER</h3></span>
+    <h6>We are here to help you</h6>
+
+<br/>
+            <h5> Hi User,</br>
+                How can I help you?
+                </h5>
+            <div class="row">
+
+                <!--left division starts from here-->
+                <div class="col-5">
+
+                <p>
+  <button class="list-group-item list-group-item-action rounded" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1" >
+    Order
+  </button>
+                    <button class="list-group-item list-group-item-action rounded" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+    Cancellations and Returns
+  </button>
+                    <button class="list-group-item list-group-item-action rounded" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+    Payment
+  </button>
+                    <button class="list-group-item list-group-item-action rounded" type="button" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
+    Account
+  </button>
+                    <button class="list-group-item list-group-item-action rounded" type="button" data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5">
+    Other
+  </button>
+
+</p>
+
+
+
+
+                </div>
+
+{% if user_email != None %}
+    <form action="/shop/contact" method="post">
+        {% else %}
+        <form action="/shop/contact_login" method="post">
+            {% endif %}
+                <!-- Right division starts from here-->
+{% csrf_token %}
+                <div class="col">
+
+<div class="collapse" id="collapseExample1">
+  <div class="card card-body">
+
+<button id="qtype1" onclick="fun1()" class="list-group-item list-group-item-action rounded" value="I missed the delivery of my order today." type="button" data-toggle="modal" data-target="#exampleModal">
+    I missed the delivery of my order today.
+
+</button>
+<button  id="qtype2" onclick="fun2()"  class="list-group-item list-group-item-action rounded" value="The delivery of my order is delayed." type="button" data-toggle="modal" data-target="#exampleModal">
+    The delivery of my order is delayed.
+</button>
+      <button id="qtype3" onclick="fun3()" value="I do if my order is approved but hasn't been shipped yet." class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    I do if my order is approved but hasn't been shipped yet.
+</button>
+      <button id="qtype4" onclick="fun4()" value="How will my order be delivered?" class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    How will my order be delivered?
+</button>
+
+  </div>
+</div>
+                    <div class="collapse" id="collapseExample2">
+  <div class="card card-body">
+    <button id="qtype5" onclick="fun5()" value="If I request for a replacement, when will I get it?" class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    If I request for a replacement, when will I get it?
+</button>
+<button id="qtype6" onclick="fun6()" value="I've still not received the refund in my bank account." class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    I've still not received the refund in my bank account.
+</button>
+      <button value="I ordered a wrong item. Can I return it?" id="qtype7" onclick="fun7()" class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    I ordered a wrong item. Can I return it?
+</button>
+      <button value="I have not received the reimbursement of my courier charges." id="qtype8" onclick="fun8()" class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    I have not received the reimbursement of my courier charges.
+</button>
+  </div>
+</div>
+                    <div class="collapse" id="collapseExample3">
+  <div class="card card-body">
+    <button value="Amount deducted from account but payment has not been made yet?" id="qtype9" onclick="fun9()" class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    Amount deducted from account but payment has not been made yet?
+</button>
+<button value="Multiple deductions has been made for a single order." id="qtype10" onclick="fun10()" class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    Multiple deductions has been made for a single order.
+</button>
+      <button value="Credit/Debit Card is not being accepted while doing transaction." id="qtype11" onclick="fun11()" class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    Credit/Debit Card is not being accepted while doing transaction.
+</button>
+      <button value="Payment has been cancelled." id="qtype12" onclick="fun12()" class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+          Payment has been cancelled.
+</button>
+  </div>
+</div>
+                    <div class="collapse" id="collapseExample4">
+  <div class="card card-body">
+
+<button value="Problem during logging in." id="qtype13" onclick="fun13()" class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    Problem during logging in.
+</button>
+<button value="I want to change my account details." id="qtype14" onclick="fun14()" class="list-group-item list-group-item-action rounded" type="button" data-toggle="modal" data-target="#exampleModal">
+    I want to change my account details.
+</button>
+
+  </div>
+</div>
+                    <div class="collapse" id="collapseExample5">
+  <div class="card card-body">
+
+
+      <div class="form-group">
+    <label for="qtype15">Any other Query</label>
+    <textarea name="qtype0" id="qtype15"  onclick="fun15()"  class="form-control" rows="3" placeholder="Submit your query"></textarea>
+  </div>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit</button>
+
+
+
+
+  </div>
+</div>
+
+
+
+
+                </div>
+            </div>
+
+
+  {% if user_email != None %}
+            <!-- Modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Do You want to Submit Query!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <input type="text" name="ntet" value="" id="itet" placeholder="" hidden>
+          <input type="text" name="userfname" value="{{user_fname}}" hidden/>
+          <input type="text" name="userid" value="{{user_email}}" hidden/>
+          <p name="ptet"></p>
+
+              <br/>
+          Press Submit to Submit Your Query...<br/>
+          We will Communicate you through the Email.<br/>
+          else<br/>
+        Press Cancel to abort!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+        {% else %}
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">You must login first</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input name="userid" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Login</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+
+    </div>
+  </div>
+        </div>
+</form>
+
+
+
+</div>
+        {% endif %}
+
+
+
+
+
+
+
+{% endblock %}
+{% block js %}
+<script>
+
+
+
+            function fun1() {
+            var x =document.getElementById('qtype1').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+
+                };
+                function fun2() {
+            var x =document.getElementById('qtype2').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun3() {
+            var x =document.getElementById('qtype3').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun4() {
+            var x =document.getElementById('qtype4').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun5() {
+            var x =document.getElementById('qtype5').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun6() {
+            var x =document.getElementById('qtype6').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun7() {
+            var x =document.getElementById('qtype7').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun8() {
+            var x =document.getElementById('qtype8').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun9() {
+            var x =document.getElementById('qtype9').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun10() {
+            var x =document.getElementById('qtype10').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun11() {
+            var x =document.getElementById('qtype11').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun12() {
+            var x =document.getElementById('qtype12').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun13() {
+            var x =document.getElementById('qtype13').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun14() {
+            var x =document.getElementById('qtype14').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+                function fun15() {
+            var x =document.getElementByName('qtype0').value;
+            var y =document.getElementById('itet');
+            y.setAttribute("value", x);
+            document.getElementsByName("ptet")[0].innerHTML =x;
+                };
+
+        </script>
+    {% endblock %}

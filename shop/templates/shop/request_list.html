@@ -1,0 +1,280 @@
+<!doctype html>
+{% extends 'shop/basic.html' %}
+{% block title%} Vendor {% endblock %}
+{% load static %}
+{% block css %}
+body
+{
+    background-color:#A4AAF4;
+}
+label
+{
+    font-size:20px;
+}
+{% endblock %}
+{% block userfname %} {{user_name}} {% endblock %}
+{% block useremail %} {{user_email}} {% endblock %}
+
+
+
+{% block dropdown %}Tracker{% endblock %}
+
+{% block option1link %}/shop/operator_tracker{% endblock %}{% block option1 %} Tracking Details {% endblock %}
+{% block body %}
+
+<div style="margin-top:50px;position: relative;background-color:#E9F0EC; padding-right:10px; padding-left:10px; padding-bottom:10px" class="container w-100 h-auto border rounded">
+
+        {% csrf_token %}
+<div style="background-color:#A369FE;" class="form-group row">
+    <div class="col"> <label style="text-align: center;">Product-Id</label></div><div class="col"> <label style="text-align: center;">Product-Name</label></div>
+    <div class="col"> <label style="text-align: center;">Vendor Name</label></div><div class="col"> <label style="text-align: center;">Vendor Email</label></div>
+    <div class="col"> <label style="float:right; right:0px;">View Product</label></div><div class="col"> <label style="float:right; right:0px;">Verify Request</label></div>
+</div>
+{% for i in request_details %}
+
+
+        <div class="form-group row">
+            <div class="col">
+                 <label style="text-align:center">{{ i.0 }}</label></div>
+            <div class="col">
+                 <label style="text-align:center">{{ i.1 }}</label></div>
+            <div class="col">
+                 <label style="text-align:center">{{ i.8 }}</label></div>
+            <div class="col">
+                 <label style="text-align:center">{{ i.9 }}</label></div>
+    <div class="col"><button style="text-align: center;" type="button" name="view_prod" value="{{i.0}}" class="btn btn-secondary rounded-pill w-100 pt-20" data-toggle="modal" data-target="#exampleModalScrollable{{forloop.counter}}">
+  View
+</button>
+  </div>
+            <div class="col"><button style="text-align: center;" type="button" name="allow_prod" value="{{i.0}}" class="btn btn-primary rounded-pill w-100 pt-20" data-toggle="modal" data-target="#exampleModalScrollable2{{forloop.counter}}">
+Allow Request
+</button>
+  </div>
+            <div class="modal fade" id="exampleModalScrollable{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Product Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <!--model body start for product view-->
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlInput1">Product Id:</label></div>
+            <div class="col">
+    <label id="exampleFormControlInput1">{{i.0}}</label></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlInput2">Product Name:</label></div>
+            <div class="col">
+    <label id="exampleFormControlInput2">{{i.1}}</label></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlInput3">Product Category:</label></div>
+            <div class="col">
+    <label id="exampleFormControlInput3">{{i.2}}</label></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlInput4">Product Subcategory:</label></div>
+            <div class="col">
+    <label id="exampleFormControlInput4">{{i.3}}</label></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlInput5">Product Price:</label></div>
+            <div class="col">
+    <label id="exampleFormControlInput5">{{i.4}}</label></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlInput6">Product Description:</label></div>
+            <div class="col">
+    <label id="exampleFormControlInput6">{{i.5}}</label></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlInput7">Uploaded Date:</label></div>
+            <div class="col">
+    <label id="exampleFormControlInput7">{{i.6}}</label></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlInput8">Product Image:</label></div>
+            <div class="col">
+    <img src="/media/{{i.7}}" class="img-fluid" id="exampleFormControlInput8"></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlInput9">Vendor Name:</label></div>
+            <div class="col">
+    <label id="exampleFormControlInput9">{{i.8}}</label></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlInput10">Vendor's Email:</label></div>
+            <div class="col">
+    <label id="exampleFormControlInput10">{{i.9}}</label></div>
+  </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- allow product button area starts-->
+
+            <form action="/shop/request_list" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+            <div class="modal fade" id="exampleModalScrollable2{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" style="max-width: auto; min-width:1000px;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="font-size: 35px; align:center;" id="exampleModalScrollableTitle1">Alter Product Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <!--model body start for product view-->
+        <div style="background-color:#daf5bd;" class="form-group row">
+            <div class="col">
+    <label >Product Id:</label></div>
+            <div class="col">
+    <label name="old_pro_id" value="{{i.0}}" >{{i.0}}</label></div>
+            <div class="col">
+                <label> Enter New Details</label></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label >Product Name:</label></div>
+            <div class="col">
+    <label name="old_pro_name" value="{{i.1}}" >{{i.1}}</label></div>
+            <div class="col">
+    <input type="text" name="pro_name" placeholder="Enter New Product Name."/></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label>Product Category:</label></div>
+            <div class="col">
+    <label name="old_pro_category" value="{{i.2}}" >{{i.2}}</label></div>
+            <div class="col">
+    <select name="pro_category" class="form-control" id="exampleFormControlSelect1">
+      <option value="-1">Select Product Category</option>
+        <option value="Metal art">Metal art</option>
+      <option value="Wooden art">Wooden art</option>
+      <option value="Painting">Painting</option>
+      <option value="Kosa-Handloom">Kosa-Handloom</option>
+    </select></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label >Product Subcategory:</label></div>
+            <div class="col">
+    <label>{{i.3}}</label></div>
+             <div class="col">
+    <input type="text" name="pro_subcategory" placeholder="Enter New Product Subcategory."/></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label >Product Price:</label></div>
+            <div class="col">
+    <label >{{i.4}}</label></div>
+             <div class="col">
+    <input type="text" name="pro_price" placeholder="Enter New Product Price."/></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label >Product Description:</label></div>
+            <div class="col">
+    <label>{{i.5}}</label></div>
+             <div class="col">
+    <textarea name="pro_desc" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+             </div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label >Uploaded Date:</label></div>
+            <div class="col">
+    <label>{{i.6}}</label></div>
+             <div class="col">
+    <input name="pro_date" type="date" class="form-control" placeholder="Select the new Date"></div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label for="exampleFormControlFile1">Product Image:</label></div>
+            <div class="col">
+    <img src="/media/{{i.7}}" class="img-fluid"/></div>
+            <div class="col">
+    <label id="exampleFormControlFile1"> You Can't Change it.</label> </div>
+  </div>
+        <div class="form-group row">
+            <div class="col">
+    <label >Vendor Name:</label></div>
+            <div class="col">
+    <label>{{i.8}}</label></div>
+            <div class="col">
+    <input type="text" name="pro_vendor" value="{{i.8}}" placeholder="Can not be changed" readonly/></div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+    <label>Vendor's Email:</label></div>
+            <div class="col">
+    <label>{{i.9}}</label></div>
+            <div class="col">
+    <input type="text" name="pro_vendoremail" value="{{i.9}}" placeholder="Can not be changed" readonly/></div>
+  </div>
+    <input type="text" name="pro_operator" value="{{user_name}}" placeholder="{{user_name}}" hidden/>
+      <input type="text" name="pro_operatoremail" value="{{user_email}}" placeholder="{{user_email}}" hidden/>
+
+
+
+<input name="old_pro_id" value="{{i.0}}" hidden />
+<input name="old_pro_name" value="{{i.1}}" hidden />
+<input name="old_pro_category" value="{{i.2}}"  hidden/>
+<input name="old_pro_subcategory" value="{{i.3}}"  hidden/>
+<input name="old_pro_price" value="{{i.4}}"  hidden/>
+<input name="old_pro_desc" value="{{i.5}}" hidden/>
+<input name="old_pro_date" value="{{i.6}}" hidden/>
+<input name="old_pro_vendor" value="{{i.8}}" hidden/>
+<input name="old_pro_vendoremail" value="{{i.9}}" hidden/>
+<input type="text" name="old_pro_image" value="C:\Users\Jayesh\PycharmProjects\TribalMart\TribalMart\media\{{i.7}}" placeholder="{{i.7}}" hidden/>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+         </div>
+{% endfor %}
+
+
+
+</div>
+
+{% endblock %}
+{% block js %}
+<script>
+var u_name = document.getElementById('user_fname').value;
+var u_email = document.getElementById('user_email').value;
+localStorage.setItem('user_name', u_name);
+localStorage.setItem('user_email', u_email);
+</script>
+{% endblock %}

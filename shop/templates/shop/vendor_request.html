@@ -1,0 +1,103 @@
+<!doctype html>
+{% extends 'shop/basic.html' %}
+{% block title%} Vendor {% endblock %}
+{% load static %}
+{% block css %}
+body
+{
+    background-color:#A4AAF4;
+}
+label
+{
+    font-size:20px;
+}
+{% endblock %}
+{% block userfname %} {{user_fname}} {% endblock %}
+{% block useremail %} {{user_email}} {% endblock %}
+
+
+<input type="text" name="u_email" value="{{user_email}}" hidden/>
+
+{% block body %}
+<form method="post" enctype="multipart/form-data" action="/shop/vendor_request">{% csrf_token %}
+<div style="margin-top:50px;position: relative;background-color:#E9F0EC;" class="container w-50 p-3 h-auto border rounded">
+<h1 style="text-align: center;">Product Details</h1>
+
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Product Name</label>
+    <input name="product_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter the Product Name">
+  </div>
+        <div class="form-group">
+    <label for="exampleFormControlSelect1">Select Category</label>
+    <select name="product_category" class="form-control" id="exampleFormControlSelect1">
+      <option value="-1">Select Product Category</option>
+        <option value="Metal art">Metal art</option>
+      <option value="Wooden art">Wooden art</option>
+      <option value="Painting">Painting</option>
+      <option value="Kosa-Handloom">Kosa-Handloom</option>
+    </select>
+  </div>
+
+        <div class="form-group">
+    <label for="exampleFormControlInput3">Product Subcategory</label>
+    <input name="product_subcategory" type="text" class="form-control" id="exampleFormControlInput3" placeholder="Enter the Product Subcategory">
+  </div>
+        <div class="form-group">
+    <label for="exampleFormControlInput4">Product Price</label>
+    <input name="product_price" type="number" class="form-control" id="exampleFormControlInput4" placeholder="0">
+  </div>
+        <div class="form-group">
+    <label for="exampleFormControlTextarea1">Product Description</label>
+    <textarea name="product_description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+        <div class="form-group">
+    <label for="exampleFormControlInput6">Publish Date</label>
+    <input name="product_date" type="date" class="form-control" id="exampleFormControlInput6" placeholder="">
+  </div>
+        <div class="form-group">
+    <label for="exampleFormControlFile1">Product Image</label>
+    <input name="product_image" type="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+        <div class="form-group">
+    <label for="exampleFormControlInput8">Vendor Name</label>
+    <input name="vendor" value="{{user_name}}" type="text" class="form-control" id="exampleFormControlInput8" placeholder="{{user_name}}" readonly>
+  </div>
+        <div class="form-group">
+    <label for="exampleFormControlInput9">Vendor Email</label>
+            <input name="vendor_email" value="{{user_email}}" type="text" class="form-control" id="exampleFormControlInput9" placeholder="{{user_email}}" readonly>
+  </div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Submit
+</button>
+        <button type="reset" class="btn btn-secondary">
+  Reset
+</button>
+
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm Submit!!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          Press Save Changes to Raise your Request...<br/>
+          Or<br/>
+        Press Cancel to Abort this submission...
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+{% endblock %}

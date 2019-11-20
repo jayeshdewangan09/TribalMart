@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>{% block title%}  {% endblock %}</title>
+      <style>
+      #logo{
+         max-width: 100px;
+      }
+      .clr
+      {
+        color: white;
+      }
+{% block css%} {% endblock %}
+  </style>
+  </head>
+  <body>
+
+{% load static %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <img id="logo" src="{%static 'shop/logo.jpg'%}"/>
+
+      <div style="margin-left: 40px;"><a style="margin-left: 0px;" class="navbar-brand" href="/shop/index"><h2>Tribal Mart</h2></a>
+
+        {% block search%}
+
+
+      {% endblock %}
+
+      </div>
+
+<input name="un" type="text" id="user_fname" value="{{user_fname}}" hidden/>
+<input name="ue" type="text" id="user_email" value="{{user_email}}" hidden/>
+<h3 class="float-right" id="u_fname" style="color:white; position: absolute; right: 5px; top:2px;">{% block userfname %} {% endblock %}</h3>
+<h5 class="float-right" id="u_email" style="color:white; position: absolute; right: 5px;">{% block useremail %} {% endblock %}</h5>
+
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div style="position: absolute;
+  right: 0px;" class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <ul style="font-size:20px;  padding-top: 55px;" class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/shop/index">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/shop/login">Login</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {% block dropdown %} {% endblock %}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% block option1link %} {% endblock %}">{% block option1 %} {% endblock %}</a>
+          <a class="dropdown-item" href="{% block option2link %} {% endblock %}">{% block option2 %} {% endblock %}</a>
+          <div class="dropdown-divider"></div>
+          <a hidden class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/shop/about">About-us</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/shop/tracker">Tracker</a>
+      </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="/shop/contact">Contact-Us</a>
+      </li>
+
+      <button type="button" class="btn btn-secondary mx-2 mt-1" id="popcart" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
+  Cart(<span id="cart">0</span>)
+</button>
+    </ul>
+  </div>
+
+</nav>
+
+  {% block body%} {% endblock %}
+
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark bg-dark" style="color:white;position: ; bottom: 0px; width: 100%; margin-top: 200px;">
+
+  <div style="background-color: #6351ce;">
+    <div class="container">
+
+      <!-- Grid row-->
+
+      <!-- Grid row-->
+
+    </div>
+  </div>
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left mt-5">
+
+    <!-- Grid row -->
+    <div class="row mt-10 pt-5">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+        <!-- Content -->
+        <h6 class="text-uppercase font-weight-bold">Company name</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+          consectetur
+          adipisicing elit.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Products</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <a class="clr" href="#!">MDBootstrap</a>
+        </p>
+        <p>
+          <a class="clr" href="#!">MDWordPress</a>
+        </p>
+        <p>
+          <a class="clr" href="#!">BrandFlow</a>
+        </p>
+        <p>
+          <a class="clr" href="#!">Bootstrap Angular</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <a class="clr" href="#!">Your Account</a>
+        </p>
+        <p>
+          <a class="clr" href="#!">Become an Affiliate</a>
+        </p>
+        <p>
+          <a class="clr" href="#!">Shipping Rates</a>
+        </p>
+        <p>
+          <a class="clr" href="#!">Help</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+        <p>
+          <i class="fas fa-envelope mr-3"></i> info@example.com</p>
+        <p>
+          <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+        <p>
+          <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2018 Copyright:
+    <div class="footer-copyright text-center"> MDBootstrap.com</div>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+
+
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  {% block js %} {% endblock %}
+  </body>
+</html>

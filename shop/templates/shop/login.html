@@ -1,0 +1,222 @@
+<!doctype html>
+{% extends 'shop/basic.html' %}
+{% block title%} Login {% endblock %}
+{% load static %}
+{% block css %}
+
+body{
+    margin: 0;
+    padding: 0;
+    background: url("{%static 'shop/pht1.jpg'%}") no-repeat center center fixed;
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+    height: 100%;
+}
+.login-box{
+    width: 320px;
+    height: 560px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 380px;
+    left: 50%;
+    position: relative;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+.avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+.login-box p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+.login-box input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.login-box input[type="text"], input[type="password"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+.login-box input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #1c8adb;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.login-box input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #39dc79;
+    color: #000;
+}
+
+.login-box a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+}
+.login-box a:hover
+{
+    color: #39dc79;
+}
+
+
+
+{% endblock %}
+
+{% block body %}
+
+
+{% if Password_match == False or found == False %}
+{% block js %}
+<script>
+
+
+
+
+jQuery(function(){
+   jQuery('#modal').click();
+});
+
+
+</script>
+{% endblock %}
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="modal" hidden>
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Email or Password not matching. <br/>
+          Please enter valid Email and Password.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div>
+<form action="/shop/login" method="post">{% csrf_token %}
+<div class="login-box">
+    <img src="{%static 'shop/avatar.png'%}" class="avatar">
+
+        <h1>Login Here</h1>
+
+            <p>Username</p>
+            <input type="text" name="userid" placeholder="Enter Username">
+            <p>Password</p>
+            <input type="password" name="password" placeholder="Enter Password">
+            <input type="submit" name="submit" value="Login">
+            <a href="#">Forget Password</a>
+
+<br/>
+<br/>
+    <p> New User!</p>
+    <br/><a href="/shop/signup">
+    <button type="button" class="btn btn-primary rounded-pill w-100 pt-20">
+  Sign up
+</button></a>
+    <br/>
+    <br/>
+<button type="button" class="btn btn-primary rounded-pill w-100 pt-20" data-toggle="modal" data-target="#exampleModalScrollable">
+  Administrative logins
+</button>
+
+        </div>
+<!-- Button trigger modal -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Administrative Login Section</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" name="admin_id" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" name="admin_password" class="form-control border" id="exampleInputPassword1" placeholder="Password">
+
+  <!--Radio buttons-->
+
+  <div class="form-check">
+  <input class="form-check-input" type="radio" name="user_type" id="exampleRadios1" value="vendor">
+  <label class="form-check-label" for="exampleRadios1">
+    Vendor
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="user_type" id="exampleRadios2" value="operator">
+  <label class="form-check-label" for="exampleRadios2">
+    Operator
+  </label>
+</div>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</form>
+</div>
+{% endblock %}
+

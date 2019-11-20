@@ -1,0 +1,240 @@
+{% extends 'shop/basic.html' %}
+
+{% block title%}Checkout{% endblock %}
+
+     {% block userfname %}
+
+         {{user_fname}}
+
+         {% endblock %}
+
+
+         {% block useremail %}
+
+         {{user_email}}
+        {% endblock %}
+
+
+{% block body%}
+
+<div class="container">
+    <div class="col my-4">
+        <h2>Step 1 - Tribal Mart Cart - Review Your Cart Items</h2>
+        <div id="items">
+            <ul class="list-group">
+
+            </ul>
+
+
+        </div>
+        <div style="background-color: #F1F0F0; display: flow-root; margin-top: 7px;">
+            <h6 style="display: inline; float: right;">Your Cart Total is Rs.<span id="totalPrice"></span></h6></div>
+
+    </div>
+
+
+    <div class="col my-4">
+        Please Enter your Details to place your cart items.<br/>
+        Make sure that you have logged in.
+        <h2>Step 2 - Enter Address & Other Details:</h2>
+        <form action="/shop/checkout" method="post">{% csrf_token %}
+            <input type="hidden" name="itemsJson" id="itemsJson">
+            <input type="hidden" name="amount" id="amount">
+            {% if user_fname != None %}
+<input type="text" name="user_email" id="1user_email" value="{{user_email}}" hidden/>
+            {% else %}
+            <input type="text" name="user_email" id="1user_email" value="" hidden/>
+            {% endif %}
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="name">Full name:</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter the 10 digit mobile number">
+                </div>
+                <div class="form-group">
+                    <label for="zip_code">Pincode:</label>
+                    <input type="text" class="form-control" name="zip_code" id="zip_code" placeholder="Enter 6 digit pincode">
+                </div>
+                <div class="form-group">
+                <label for="address1">Flat, House no., Building, Company, Apartment: </label>
+                <input type="text" class="form-control" name="address1" id="address1" placeholder="Apartment, studio, or floor">
+            </div>
+                <div class="form-group">
+                <label for="address2">Area, Colony, Street, Sector, Village:</label>
+                <input type="text" class="form-control" name="address2" id="address2" placeholder="1234 Main St">
+            </div>
+                <div class="form-group">
+                <label for="address3">Landmark e.g. near apollo hospital:</label>
+                <input type="text" class="form-control" name="address3" id="address3" placeholder="E.g. Near AIIMS Flyover, Behind Regal Cinema etc.">
+            </div>
+                <div class="form-group">
+                <label for="city">Town/City:</label>
+                <input type="text" class="form-control" name="city" id="city" placeholder="Enter your Town/City">
+            </div>
+                <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" class="form-control" name="state" id="state" placeholder="Enter the State">
+            </div>
+                <div class="form-group">
+      <label for="addresstype">Address Type: </label>
+      <select name="addresstype" id="addresstype" class="form-control">
+        <option selected>Select an Address Type</option>
+        <option>Home (7 am - 9pm delivery)</option>
+        <option>Office/Commercial (10 am - 6pm delivery)</option>
+      </select>
+    </div>
+            </div>
+
+
+
+    <button type="button" class="btn btn-primary" onclick="myf()"> Place Order</button>
+            <button type="button" hidden id="checking1" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+        <button type="button" class="btn btn-primary" id="checking2" hidden data-toggle="modal" data-target="#exampleModalLong">
+  Launch demo modal
+</button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Confirm place the order ! <br/>
+          Press submit to confirm..
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+        </form>
+
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">You must login first</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+<form action="/shop/checkout_login" method="post">{% csrf_token %}
+      <div class="modal-body">
+
+        <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input name="userid" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Login</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+</form>
+    </div>
+  </div>
+</div>
+    </div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script>
+
+
+
+if (localStorage.getItem('cart') == null) {
+    var cart = {};
+} else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+}
+console.log(cart);
+var sum = 0;
+var totalPrice = 0;
+if ($.isEmptyObject(cart)) {
+    //if object is empty
+    mystr = `<p>Your cart is empty, please add some items to your cart before checking out!</p>`
+    $('#items').append(mystr);
+} else {
+    for (item in cart) {
+        let name = cart[item][1];
+        let qty = cart[item][0];
+        let itemPrice = cart[item][2];
+        sum = sum + qty;
+        totalPrice = totalPrice + qty * itemPrice
+        mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${name}
+                    <span style="display:inline; margin-left:550px;">Rs. ${itemPrice}</span>
+                    <span class="badge badge-primary badge-pill">${qty}</span>
+                </li>`
+        $('#items').append(mystr);
+    }
+}
+document.getElementById('cart').innerHTML = sum;
+document.getElementById('totalPrice').innerHTML = totalPrice;
+{% if user_fname == None %}
+if(!(localStorage.getItem("us_fname") == null))
+{
+var ufn = localStorage.getItem("us_fname");
+var uem = localStorage.getItem("us_email");
+console.log(ufn);
+document.getElementById('u_fname').innerHTML = ufn;
+document.getElementById('u_email').innerHTML = uem;
+
+
+document.getElementById('1user_email').setAttribute("value", uem);
+
+}
+{% endif %}
+function myf()
+{
+    if(document.getElementById('1user_email').value != "" )
+    {
+        jQuery('#checking1').click();
+    }
+    else
+    {
+        jQuery('#checking2').click();
+        console.log(ufn);
+    }
+}
+
+
+$('#itemsJson').val(JSON.stringify(cart));
+{% if thank %}
+alert('Thanks for ordering with us. Your Order-Id is                                    {{id}}                                                                Use it to track your order using our order tracker');
+localStorage.removeItem("cart");
+document.location = "/shop/index";
+{% endif %}
+{% if thank == False %}
+alert('Please enter the correct data..');
+
+{% endif %}
+{% if checking == False %}
+alert('password is incorrect..');
+{% endif %}
+{% if checking_email == False %}
+alert('Email not found..');
+{% endif %}
+$('#amount').val($('#totalPrice').html())
+</script>
+{% endblock %}
